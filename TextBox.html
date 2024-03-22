@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>TextBox</title>
+	<link rel="stylesheet" type="text/css" href="textboxstyle.css">
+</head>
+<body>
+
+	<h1 align="center" class="heading"> TEXT BOX </h1>
+	<div align="center">
+		<form class="textboxform">
+		<label>Enter your text: </label> <br><br>
+		<textarea id="text" rows="10" cols="50" autofocus onkeyup="updateInfo()"> </textarea> <br>
+		<button type="button" onclick="transformToUpperCase()">UPPERCASE</button>
+		<button type="button" onclick="transformToLowerCse()">LOWERCASE</button>
+		<button type="button" onclick="changeColor()">CHANGE COLOR</button>
+		<button type="button" onclick="underlinetext()">UNDERLINE</button>
+		<br> <br>
+		<button type="button" onclick="findName()">FIND</button>
+		<button type="button" onclick="clearTextbox()">CLEAR</button>
+		<button type="button" onclick="replaceText()">REPLACE</button>
+		<button type="button" onclick="copyText()">COPY</button>
+
+
+
+		<h2 id="info">This text box contains 0 words and 0 characters. </h2>
+	</form>
+	</div>
+
+	<script type="text/javascript">
+		let text = document.getElementById("text") ;
+		let textInfo = document.getElementById("info") ;
+		let clr ;
+
+		function transformToUpperCase() 
+		{
+			text.value = text.value.toUpperCase() ;
+		}
+
+		function transformToLowerCse() 
+		{
+			text.value = text.value.toLowerCase() ;
+		}
+
+		function changeColor()
+		{
+			clr = prompt(("Enter your fav color: ").toLowerCase()) ;
+			text.style.color = clr ;
+		}
+
+		function underlinetext() 
+		{
+			text.style.textDecoration = `underline 2px solid ${clr}` ;
+		}
+
+		function findName() 
+		{
+			let searchText = prompt("Enter the serching text: ") ;
+			if (text.value.includes(searchText))
+				alert(`${searchText} is present in TextBox.`)
+			else
+				alert(`${searchText} is not present in TextBox.`)
+		}
+
+		function clearTextbox() 
+		{
+			text.value = null;
+			updateInfo() ;
+		}
+
+		// function replaceText() 
+		// {
+		// 	let newText = prompt("Enter the new Text: ") ;
+		// }
+
+		function copyText() 
+		{
+			navigator.clipboard.writeText(text.value) ;
+		}
+
+
+
+
+		function updateInfo()
+		{
+			let numberOfWords = text.value.trim().split(" ").length ;
+			let numberOfChar = text.value.length ;
+			if(numberOfWords==1)
+			{
+				numberOfWords = 0 ;
+				numberOfChar = 0 ;
+			}
+			else
+			{
+				numberOfWords = numberOfWords
+				numberOfChar = numberOfChar ;
+			}
+			textInfo.innerHTML = `This text box contains ${numberOfWords} words and ${numberOfChar} characters.` ;
+		}
+	</script>
+</body>
+</html>
